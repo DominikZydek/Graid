@@ -10,7 +10,9 @@ public class SqLiteDatabaseManager {
         ResultSet resultSet = null;
         TypeOfUser typeOfUser = null;
         try {
-            dbConn = DriverManager.getConnection("jdbc:sqlite:src/main/resources/data/GraidDB.db");
+            dbConn = DriverManager.getConnection("jdbc:sqlite:" +
+                    SqLiteDatabaseManager.class.getClassLoader().getResource("data/GraidDB.db").getFile());
+
 
             for (TypeOfUser userType : TypeOfUser.values()) {
                 String query = "SELECT * FROM " + userType.name() + "s WHERE Login = ? AND Password = ?";
